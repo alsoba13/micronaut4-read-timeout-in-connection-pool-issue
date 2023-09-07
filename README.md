@@ -3,7 +3,7 @@ This repository has the code to reproduce #issue.
 It implements a Micronaut 4.1.x service that counts the number of bytes of https://micronaut.io/launch landing page.
 
 # How to reproduce
-You may reproduce it in two different ways
+Use Java 17. You may reproduce it in two different ways.
 
 ## 1. Run tests
 
