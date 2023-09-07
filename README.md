@@ -1,28 +1,29 @@
-## Micronaut 4.1.0 Documentation
+This repository has the code to reproduce #issue. 
 
-- [User Guide](https://docs.micronaut.io/4.1.0/guide/index.html)
-- [API Reference](https://docs.micronaut.io/4.1.0/api/index.html)
-- [Configuration Reference](https://docs.micronaut.io/4.1.0/guide/configurationreference.html)
-- [Micronaut Guides](https://guides.micronaut.io/index.html)
----
+It implements a Micronaut 4.1.x service that counts the number of bytes of https://micronaut.io/launch landing page.
 
-- [Shadow Gradle Plugin](https://plugins.gradle.org/plugin/com.github.johnrengelman.shadow)
-- [Micronaut Gradle Plugin documentation](https://micronaut-projects.github.io/micronaut-gradle-plugin/latest/)
-- [GraalVM Gradle Plugin documentation](https://graalvm.github.io/native-build-tools/latest/gradle-plugin.html)
-## Feature micronaut-aot documentation
+# How to reproduce
+You may reproduce it in two different ways
 
-- [Micronaut AOT documentation](https://micronaut-projects.github.io/micronaut-aot/latest/guide/)
+## 1. Run tests
 
+1. Run tests:
+   ```
+    ./gradlew test --info
+   ```
+2. Check that, when the delay matches the read timeout (1.9s), the requests start failing.
 
-## Feature serialization-jackson documentation
+## 2. Run service and execute curl
 
-- [Micronaut Serialization Jackson Core documentation](https://micronaut-projects.github.io/micronaut-serialization/latest/guide/)
-
-
-## Feature ksp documentation
-
-- [Micronaut Kotlin Symbol Processing (KSP) documentation](https://docs.micronaut.io/latest/guide/#kotlin)
-
-- [https://kotlinlang.org/docs/ksp-overview.html](https://kotlinlang.org/docs/ksp-overview.html)
-
-
+1. Run service:
+   ```
+    ./gradlew run
+   ```
+2. In a new terminal run the curls delayed:
+   ```
+   while true; do
+     curl localhost:8080 && echo
+     sleep 1.9
+   done
+   ```
+3. Check that some requests fail. Try changing the sleep to see that the service works fine otherwise.
