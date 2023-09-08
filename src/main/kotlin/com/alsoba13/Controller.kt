@@ -1,5 +1,7 @@
 package com.alsoba13
 
+import io.micronaut.http.HttpResponse
+import io.micronaut.http.MutableHttpResponse
 import io.micronaut.http.annotation.Controller
 import io.micronaut.http.annotation.Get
 import org.reactivestreams.Publisher
@@ -10,13 +12,13 @@ class Controller(
     private val micronautClient: MicronautClient,
 ) {
     @Get
-    fun hello(): Publisher<String> =
+    fun hello(): Publisher<MutableHttpResponse<String>> =
         Mono.from(
             micronautClient.get()
         ).map {
             val charCount = it.body().count()
-            "Micronaut launch page has $charCount characters"
+            HttpResponse.ok("Micronaut launch page has $charCount characters")
         }.onErrorResume {
-            Mono.just(it.toString())
+            Mono.just(HttpResponse.serverError(it.toString()))
         }
 }
