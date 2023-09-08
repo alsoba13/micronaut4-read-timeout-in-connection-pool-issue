@@ -19,11 +19,11 @@ Use Java 17. You may reproduce it in two different ways.
    ```
     ./gradlew run
    ```
-2. In a new terminal run the curls delayed:
+2. In a new terminal run the delayed curls:
    ```
    while true; do
-     curl localhost:8080 && echo
-     sleep 1.9
+     /usr/bin/time curl localhost:8080 -w "\n"
+     echo "---sleeping 1.9s---"; sleep 1.9
    done
    ```
 3. Check that some requests fail. Try changing the sleep to see that the service works fine otherwise.
