@@ -1,4 +1,4 @@
-This repository has the code to reproduce #issue. 
+This repository has the code to reproduce [this micronaut issue](https://github.com/micronaut-projects/micronaut-core/issues/9843). 
 
 It implements a Micronaut 4.1.x service that counts the number of bytes of https://micronaut.io/launch landing page.
 
